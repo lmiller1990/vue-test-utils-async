@@ -10,9 +10,12 @@ describe('App', () => {
   it('sets some text', () => { 
     const wrapper = shallow(App)
 
-    wrapper.find('button').trigger('click')
-
-    expect(wrapper.vm.msg).toBe('testing')
+    return new Promise((res, rej) => {
+    res(wrapper.find('button').trigger('click'))
+    })
+    .then(() => {
+      expect(wrapper.vm.msg).toBe('testing')
+    })
   })
 
   // can force it to pass by setTimout for 1ms
@@ -37,28 +40,4 @@ describe('App', () => {
       done()
     })
   })
-
-  it('renders an error for an invalid field', () => {
-    const wrapper = shallow(App)
-
-    expect(wrapper.find('#errors').text().trim()).toBe('The email field is required.')
-  })
-})
-
-it('renders an error for an invalid field', (done) =>{
-  const wrapper = shallow(App)
-
-  setTimeout(() => {
-    expect(wrapper.find('#errors').text().trim()).toBe('The email field is required.')
-    done()
-  })
-})
-
-// again make it pass using setTimeout
-it('renders an error for an invalid field', () =>{
-  const wrapper = shallow(App)
-
-  setTimeout(() => {
-    expect(wrapper.find('#errors').text().trim()).toBe('The email field is required.')
-  }, 1)
 })
