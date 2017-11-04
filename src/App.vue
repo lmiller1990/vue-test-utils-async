@@ -1,38 +1,22 @@
 <template>
   <div id="app">
-    {{ msg }}
-    <button @click="handle">Button</button>
-    <hr>
-    <input placeholder="email" v-model="email" name="email" v-validate.initial="'required'" />
-    <div id="errors">
-      {{ errors.first('email') }}
-    </div>
+    <SomeComponent @custom="callMethod" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
-  
+
   data () {
     return {
-      msg: '',
-      email: ''
+      counter: 0
     }
   },
 
   methods: {
-    promise () {
-      return new Promise(res => {
-        res()
-      })
-    },
-
-    handle () {
-      this.promise()
-        .then(() => {
-          this.msg = 'testing'
-        })
+    callMethod () {
+      this.counter += 1
     }
   }
 }
